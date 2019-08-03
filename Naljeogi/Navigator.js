@@ -2,7 +2,6 @@ import React from 'react';
 import {createAppContainer,
         createBottomTabNavigator,
         createStackNavigator } from "react-navigation"
-import {View} from "react-native"
 import DiaryList from "./screens/DiaryList"
 import MyPage from "./screens/MyPage"
 import AddPost from "./screens/AddPost"
@@ -44,6 +43,7 @@ const MainNavigation = createBottomTabNavigator({
         showLabel: false
     }
 });
+
 
 const AppNavigator = createStackNavigator ({
     Edit: AddPost,
