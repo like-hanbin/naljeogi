@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
         width: width-50,
     },
     title: {
-        
         fontSize: 40,
         paddingBottom: 12,
         borderBottomWidth:2,
@@ -62,7 +61,7 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 1.5,
         borderBottomRightRadius: 1.5,
         borderBottomEndRadius: 1.5,
-        borderBottomColor: '#f59b42'
+        borderBottomColor: '#7a7171'
         
     },
     content: {

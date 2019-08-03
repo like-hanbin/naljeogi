@@ -20,7 +20,7 @@ const MainNavigation = createBottomTabNavigator({
         screen: () => null,
         navigationOptions: {
             tabBarIcon: () => {
-                return <Ionicons name='ios-create' size={25} color="tomato"/>
+                return <Ionicons name='ios-create' size={25} color="#7a7171"/>
             },
             tabBarOnPress: ({navigation}) => {
                 navigation.navigate('Edit');
@@ -38,7 +38,7 @@ const MainNavigation = createBottomTabNavigator({
 },
 {
     tabBarOptions: {
-        activeTintColor: 'tomato',
+        activeTintColor: '#7a7171',
         inactiveTintColor: 'gray',
         showLabel: false
     }

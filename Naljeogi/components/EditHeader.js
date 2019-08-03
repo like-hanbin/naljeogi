@@ -10,7 +10,7 @@ const EditHeader = ({navigation,addPost}) => {
                 activeOpacity={0.8}
                 onPress={() => {navigation.goBack()}}
                 hitSlop={{top:32, bottom:32, left:32, right: 32}}>
-                <Ionicons name="ios-arrow-back" size={25} color={'#f59b42'}></Ionicons>
+                <Ionicons name="ios-arrow-back" size={25} color={'#7a7171'}></Ionicons>
             </TouchableOpacity>
             <TouchableOpacity
                 activeOpacity={0.8}
@@ -19,7 +19,7 @@ const EditHeader = ({navigation,addPost}) => {
                     navigation.navigate('DiaryList');
                 }}
                 hitSlop={{top:32, bottom:32, left:32, right: 32}}>
-                <Ionicons name="ios-save" size={25} color={'#f59b42'}></Ionicons>
+                <Ionicons name="ios-save" size={25} color={'#7a7171'}></Ionicons>
             </TouchableOpacity>
         </View>
     );
