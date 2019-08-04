@@ -1,33 +1,36 @@
 import React from 'react';
-import { Text,View,FlatList,StyleSheet,Dimensions,ScrollView } from 'react-native';
+import { Text,View,FlatList,StyleSheet,Dimensions,ScrollView,TouchableOpacity } from 'react-native';
 import {SafeAreaView} from 'react-navigation';
 import CalendarPicker from 'react-native-calendar-picker';
 
 const {width,height} = Dimensions.get('window');
 
-_makeList = ({item}) => {
-    return (
-        <View style={styles.itemContainer}>
-            <Text style={styles.title}>{item.title}</Text>
-            <Text style={styles.content}>{item.content}</Text>
-        </View>
-    );
-}
-
-export default DiaryList = (props) => {
+export default ListScreen = (props) => {
     return (
         <SafeAreaView>
-            <View sttyle={styles.diaryContainer}>
+            <View style={styles.diaryContainer}>
                 <CalendarPicker
+                    selectedStartDate={props.screenProps.selectedDate}
                     previousTitle="<"
                     nextTitle=">"
-                    todayBackgroundColor="#ffe28c"
-                    selectedDayColor="#7a7171"
+                    todayTextStyle={{fontWeight: 'bold',textDecorationLine: 'underline'}}
+                    todayBackgroundColor={'transparent'}
+                    selectedDayColor="#ffe28c"
                     onDateChange={props.screenProps.changeDate}/>
                 <ScrollView style={styles.listContainer}>
                     <FlatList
                         data={props.screenProps.Posts.filter(data => { return data.date == props.screenProps.selectedDate})}
-                        renderItem={this._makeList}
+                        renderItem={({item,index}) => {
+                            return (
+                                <TouchableOpacity
+                                    activeOpacity={0.8}
+                                    onPress={() => {props.navigation.navigate('View',{id:item.id})}}>
+                                    <View style={styles.itemContainer}>
+                                        <Text style={styles.title} numberOfLines={1}>{item.title}</Text>
+                                        <Text style={styles.content} numberOfLines={1}>{item.content}</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            );}}
                         keyExtractor={(_, index) => { return `${index}`}}/>
                 </ScrollView>
             </View>
@@ -38,20 +41,16 @@ export default DiaryList = (props) => {
 
 const styles = StyleSheet.create({
 
-    diaryContainer: {
-        width: 1,
-    },
-
     listContainer: {
         marginLeft:25,
     },
     title:{
-        fontSize: 20,
+        fontSize: 17,
         color: "#3b3b3b",
         fontWeight: "600",
     },
     content:{
-        fontSize: 15,
+        fontSize: 13,
         paddingTop: 5,
         color: "gray"
     },
@@ -62,7 +61,6 @@ const styles = StyleSheet.create({
     itemContainer: {
         flex: 1,
         width: width-60,
-        height: 50,
         paddingTop:10,
         paddingLeft:10,
         marginBottom:20,

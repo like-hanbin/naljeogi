@@ -2,51 +2,53 @@ import React from 'react';
 import {createAppContainer,
         createBottomTabNavigator,
         createStackNavigator } from "react-navigation"
-import DiaryList from "./screens/DiaryList"
-import MyPage from "./screens/MyPage"
-import AddPost from "./screens/AddPost"
+import ListScreen from "./screens/ListScreen"
+import PrivateScreen from "./screens/PrivateScreen"
+import EditScreen from "./screens/EditScreen"
+import ViewScreen from "./screens/ViewScreen"
 import {Ionicons} from '@expo/vector-icons'
 
 const MainNavigation = createBottomTabNavigator({
-    DiaryList: {
-        screen: DiaryList,
+    ListScreen: {
+        screen: ListScreen,
         navigationOptions: {
-           tabBarIcon: () => {
-               return <Ionicons name='ios-apps' size={25}/>
+           tabBarIcon: ({tintColor}) => {
+               return <Ionicons name='ios-apps' size={25} color={tintColor}/>
            }
         }
     },
-    AddPost: {
+    EditScreen: {
         screen: () => null,
         navigationOptions: {
-            tabBarIcon: () => {
-                return <Ionicons name='ios-create' size={25} color="#7a7171"/>
+            tabBarIcon: ({tintColor}) => {
+                return <Ionicons name='ios-create' size={25} color={tintColor}/>
             },
             tabBarOnPress: ({navigation}) => {
                 navigation.navigate('Edit');
             }
         }
     },
-    MyPage: {
-        screen: MyPage,
+    PrivateScreen: {
+        screen: PrivateScreen,
         navigationOptions: {
-            tabBarIcon: () => {
-                return <Ionicons name='md-person'size={25}/>
+            tabBarIcon: ({tintColor}) => {
+                return <Ionicons name='md-person'size={25} color={tintColor}/>
             }
          }
     }
 },
 {
     tabBarOptions: {
-        activeTintColor: '#7a7171',
-        inactiveTintColor: 'gray',
+        activeTintColor: '#000',
+        inactiveTintColor: "#bdbdbd",
         showLabel: false
     }
 });
 
 
 const AppNavigator = createStackNavigator ({
-    Edit: AddPost,
+    Edit: EditScreen,
+    View: ViewScreen,
     Tab: MainNavigation,
 },{
     initialRouteName: 'Tab',
