@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text,View,FlatList,StyleSheet,Dimensions } from 'react-native';
+import { Text,View,FlatList,StyleSheet,Dimensions,ScrollView } from 'react-native';
 import {SafeAreaView} from 'react-navigation';
 import CalendarPicker from 'react-native-calendar-picker';
 
@@ -17,18 +17,31 @@ _makeList = ({item}) => {
 export default DiaryList = (props) => {
     return (
         <SafeAreaView>
-            <CalendarPicker/>
-            <View style={styles.listContainer}>
-                <FlatList
-                    data={props.screenProps.Posts}
-                    renderItem={this._makeList}
-                    keyExtractor={(_, index) => { return `${index}`}}/>
+            <View sttyle={styles.diaryContainer}>
+                <CalendarPicker
+                    previousTitle="<"
+                    nextTitle=">"
+                    todayBackgroundColor="#ffe28c"
+                    selectedDayColor="#7a7171"
+                    onDateChange={props.screenProps.changeDate}/>
+                <ScrollView style={styles.listContainer}>
+                    <FlatList
+                        data={props.screenProps.Posts.filter(data => { return data.date == props.screenProps.selectedDate})}
+                        renderItem={this._makeList}
+                        keyExtractor={(_, index) => { return `${index}`}}/>
+                </ScrollView>
             </View>
+            
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
+
+    diaryContainer: {
+        width: 1,
+    },
+
     listContainer: {
         marginLeft:25,
     },
@@ -40,6 +53,10 @@ const styles = StyleSheet.create({
     content:{
         fontSize: 15,
         paddingTop: 5,
+        color: "gray"
+    },
+    date:{
+        fontSize: 10,
         color: "gray"
     },
     itemContainer: {
