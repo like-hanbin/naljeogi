@@ -6,22 +6,24 @@ const {width,height} = Dimensions.get('window');
 
 export default ViewScreen = (props) => {
     const id = props.navigation.getParam('id');
-    console.log('ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ'+id);
-
-    const post = props.screenProps.Posts.find((item) => {return item.id = id});
+    const post = props.screenProps.Posts.find((item) => {return item.id == id})
 
     return (
         <SafeAreaView>
             <View style={styles.contentContainer}>
                 <ViewHeader 
                     postId={id}
-                    deletePost={props.screenProps.deletePost}
+                    deletePost={ async(id) => {props.screenProps.deletePost(id)}}
                     style={styles.viewHeader}/>
-                <View style={styles.emptyBox}/>
-                <Text style={styles.title}>{post.title}</Text>
-                <View style={styles.emptyBox}/>
-                <Text style={styles.content}>{post.content}</Text>
-                {post.image?<Image source={{uri: post.image}} style={{width:100,height:100}}/>:null}
+                {post?
+                    <View>
+                    <View style={styles.emptyBox}/>
+                    <Text style={styles.title}>{post.title}</Text>
+                    <View style={styles.emptyBox}/>
+                    <Text style={styles.content}>{post.content}</Text>
+                    {post.image?<Image source={{uri: post.image}} style={{width:100,height:100}}/>:null}
+                    </View>
+                :null}
             </View>
         </SafeAreaView>
     );

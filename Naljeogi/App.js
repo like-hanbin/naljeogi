@@ -14,13 +14,13 @@ export default class App extends React.Component {
     selectedDate: '',
     imageUrl:'',
     Posts : [{
-      id : 1,
+      id : 'abcd-efc',
       title :'날씨가 좋은 날',
       content :'소풍 가자',
       date :'20190805',
       image: '',
     },{
-      id :2,
+      id :'abcd-efg',
       title :'다이어트',
       content :'진심 내일부터 한다',
       date :'20190805',
@@ -111,7 +111,8 @@ export default class App extends React.Component {
     },this.saveData);
   }
 
-  _deletePost = ({id}) => {
+  _deletePost = (id) => {
+    console.log("나와랏"+id);
     const prevPosts = [...this.state.Posts];
     prevPosts.find((item) => {return item.id == id});
     deleteIndex = prevPosts.findIndex((item) => {return item.id == id});

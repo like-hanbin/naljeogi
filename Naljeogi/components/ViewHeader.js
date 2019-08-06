@@ -16,7 +16,7 @@ const ViewHeader = (props) => {
                 activeOpacity={0.8}
                 onPress= {() => {
                     props.deletePost(props.postId);
-                    props.navigation.goBack()
+                    props.navigation.navigate('Tab');
                 }}
                 hitSlop={{top:32, bottom:32, left:32, right: 32}}>
                 <Ionicons name="ios-close" size={30} color={'#7a7171'}></Ionicons>
