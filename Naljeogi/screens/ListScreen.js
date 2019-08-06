@@ -24,7 +24,7 @@ export default ListScreen = (props) => {
                             return (
                                 <TouchableOpacity
                                     activeOpacity={0.8}
-                                    onPress={() => {props.navigation.navigate('View',{id:item.id})}}>
+                                    onPress={() => {props.navigation.navigate('View',{id:item.id});console.log(item.id);}}>
                                     <View style={styles.itemContainer}>
                                         <Text style={styles.title} numberOfLines={1}>{item.title}</Text>
                                         <Text style={styles.content} numberOfLines={1}>{item.content}</Text>

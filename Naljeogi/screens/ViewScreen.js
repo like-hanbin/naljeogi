@@ -2,17 +2,22 @@ import React from 'react';
 import { Text,View,StyleSheet,Dimensions,Image } from 'react-native'
 import {SafeAreaView} from 'react-navigation';
 import ViewHeader from '../components/ViewHeader'
-
 const {width,height} = Dimensions.get('window');
 
 export default ViewScreen = (props) => {
-    const id = props.navigation.getParam('id')-1;
-    const post = props.screenProps.Posts[id];
+    const id = props.navigation.getParam('id');
+    console.log('ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ'+id);
+
+    const post = props.screenProps.Posts.find((item) => {return item.id = id});
 
     return (
         <SafeAreaView>
             <View style={styles.contentContainer}>
-                <ViewHeader style={styles.viewHeader}/>
+                <ViewHeader 
+                    postId={id}
+                    deletePost={props.screenProps.deletePost}
+                    style={styles.viewHeader}/>
+                <View style={styles.emptyBox}/>
                 <Text style={styles.title}>{post.title}</Text>
                 <View style={styles.emptyBox}/>
                 <Text style={styles.content}>{post.content}</Text>
@@ -23,7 +28,8 @@ export default ViewScreen = (props) => {
 }
 
 const styles = StyleSheet.create({
-    contentContainer: {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+    contentContainer: {      
+        width: width-50,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
         marginTop: 20,
         marginLeft: 20,
     },

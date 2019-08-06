@@ -3,6 +3,7 @@ import { StyleSheet, AsyncStorage } from 'react-native';
 import MainNavigation from './Navigator'
 import * as ImagePicker from 'expo-image-picker'
 import * as Permissions from 'expo-permissions'
+import uuid from 'uuid/v4';
 
 export default class App extends React.Component {
 
@@ -16,13 +17,13 @@ export default class App extends React.Component {
       id : 1,
       title :'날씨가 좋은 날',
       content :'소풍 가자',
-      date :'20190801',
+      date :'20190805',
       image: '',
     },{
-      id : 2,
+      id :2,
       title :'다이어트',
       content :'진심 내일부터 한다',
-      date :'20190803',
+      date :'20190805',
       image: '',
     }]
   }
@@ -77,7 +78,7 @@ export default class App extends React.Component {
     this.setState({
       selectedDate: year+month+day
     },() => { 
-      console.log(this.state.Posts.filter(data => { return data.date == this.state.selectedDate}));
+      console.log('');
     });
   }
 
@@ -85,20 +86,22 @@ export default class App extends React.Component {
     await Permissions.askAsync(Permissions.CAMERA_ROLL);
     const { cancelled, uri} = await ImagePicker.launchImageLibraryAsync({allowsEditing:false});
     this.setState({imageUrl: uri});
-    console.log(uri);
   }
 
   _addPost = () => {
+    let id = uuid();
     const today = this._getToday();
     const prevPosts = [...this.state.Posts];
     const newPost = {
-      id:this.state.Posts.length+1
+      id:id
       ,title:this.state.inputTitle
       ,content:this.state.inputContent
       ,date: today
       ,image: this.state.imageUrl
     }
 
+    console.log("새로운 아이디"+newPost.id);
+    
     this.setState({
       inputTitle: '',
       inputContent: '',
@@ -108,8 +111,16 @@ export default class App extends React.Component {
     },this.saveData);
   }
 
+  _deletePost = ({id}) => {
+    const prevPosts = [...this.state.Posts];
+    prevPosts.find((item) => {return item.id == id});
+    deleteIndex = prevPosts.findIndex((item) => {return item.id == id});
+    deletePost = prevPosts.splice(deleteIndex,1);
+    this.setState({Posts:prevPosts},this.saveData);
+  }
+
   saveData = () => {
-    AsyncStorage.setItem('@diary:state',JSON.stringify(this.state));
+    AsyncStorage.setItem('@diary:state',JSON.stringify(this.state)); AsyncStorage.clear();
   }
 
 
@@ -127,6 +138,7 @@ export default class App extends React.Component {
           changeContent: this._changeContent,
           changeDate: this._changeDate,
           addPost:this._addPost,
+          deletePost:this._deletePost
         }}/>
     );
   }

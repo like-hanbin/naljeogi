@@ -6,17 +6,11 @@ import { Text,
         ,Dimensions
         ,Image } from 'react-native';
 import {SafeAreaView} from 'react-navigation';
-import {Ionicons} from '@expo/vector-icons'
-import { Directions } from 'react-native-gesture-handler';
 import EditHeader from '../components/EditHeader'
 
 const {width,height} = Dimensions.get('window');
 
 export default EditScreen = (props) => {
-    
-    let title = '';
-    let content = '';
-    console.log(props);
 
     return (
         <SafeAreaView style={styles.container}>
